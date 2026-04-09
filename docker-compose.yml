@@ -1,0 +1,10 @@
+services:
+  flask-mvp:
+    build: .
+    container_name: flask-mvp
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
