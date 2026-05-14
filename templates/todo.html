@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title>Todo List</title>
+            <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+        </head>
+        <body>
+            {% extends "navbar.html" %}
+
+            {% block content %}
+
+            <h1>Todo List</h1>
+            
+            <form action="/add" method="POST">
+                <input
+                    type="text"
+                    name="content"
+                    placeholder="請輸入待辦事項"
+                >
+                    <button type="submit">
+                        新增
+                    </button>
+
+            </form>
+
+            <hr>
+
+            <ul>
+
+            {% for todo in todos %}
+
+                <li>{{ todo.content }}</li>
+
+            {% endfor %}
+
+            </ul>
+
+            {% endblock %}
+        </body>
+    </html>

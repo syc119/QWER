@@ -1,8 +1,12 @@
-    <nav>
-        <a href="{{ url_for('home') }}">首頁</a>
-        <a href="{{ url_for('html_tags') }}">HTML 展示</a>
-    </nav>
-
-    <hr>
-
-    {% block content %}{% endblock %}
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Flask App{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+<body>
+  {% block content %}{% endblock %}
+</body>
+</html>
