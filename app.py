@@ -55,6 +55,22 @@ def add_todo():
         db.session.commit()
 
     return redirect("/todo")
-    
+
+@app.route("/update/<int:id>", methods=["POST"])
+def update_todo(id):
+
+    todo = Todo.query.get(id)
+
+    if todo:
+
+        new_content = request.form.get("content")
+
+        if new_content:
+
+            todo.content = new_content
+
+            db.session.commit()
+
+    return redirect("/todo")
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000,debug=True)
