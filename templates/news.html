@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hacker News</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+    </head>
+    <body>
+        {% extends "navbar.html" %}
+
+    {% block content %}
+        <h1>Hacker News</h1>
+        <ul>
+            {% for news in news_list %}
+     
+                <li>
+                    <a href="{{ news.url }}" target="_blank">
+                        {{ news.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+         {% endblock %}
+    </body>
+</html>
