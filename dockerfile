@@ -11,6 +11,17 @@ COPY requirements.txt .
 # 在容器中安裝 Flask
 RUN pip install --no-cache-dir -r requirements.txt
 
+
+RUN apt-get update && apt-get install -y \
+    chromium \
+    chromium-driver \
+    libnss3 \
+    libxss1 \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    && rm -rf /var/lib/apt/lists/*
+
 # 把目前專案資料夾裡的內容全部複製進容器
 COPY . .
 

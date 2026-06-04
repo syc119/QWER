@@ -4,3 +4,4 @@ Flask-SQLAlchemy
 psycopg2-binary
 requests
 bs4
+selenium
