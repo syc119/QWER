@@ -2,9 +2,14 @@
 <html>
     <head>
         <title>Quotes</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     </head>
 
     <body>
+        {% extends "navbar.html" %}
+
+    {% block content %}
+
         <h1>Quotes</h1>
 
         {% for quote in quote_list %}
@@ -24,5 +29,6 @@
             <hr>
 
         {% endfor %}
+        {% endblock %}
     </body>
 </html>

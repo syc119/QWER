@@ -4,8 +4,11 @@
         <a href="{{ url_for('todo') }}">todo</a>
         <a href="{{ url_for('news') }}">Hacknews</a>
         <a href="{{ url_for('quotes') }}">Quotes</a>
+        <a href="{{ url_for('stock_dashboard') }}">股市分析</a>
     </nav>
 
     <hr>
 
+    <div class="main-content">
     {% block content %}{% endblock %}
+    </div>

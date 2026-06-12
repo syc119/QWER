@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    {% extends "navbar.html" %}
+
+    {% block content %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>股市動態籌碼與布林通道分析</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f7fafc; padding: 40px; margin: 0; }
+        .wrapper { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        h1 { text-align: center; color: #2d3748; }
+        .tabs { text-align: center; margin-bottom: 25px; }
+        .tab-btn { padding: 10px 20px; font-size: 15px; background-color: #edf2f7; border: none; border-radius: 4px; cursor: pointer; margin: 0 5px; font-weight: bold; }
+        .tab-btn.active { background-color: #4299e1; color: white; }
+        .chart-box { position: relative; height: 450px; width: 100%; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    <h1>📈 股市動態籌碼與布林通道分析</h1>
+    <p style="text-align: center; color: #718096; margin-bottom: 20px;">期末專題：結合動態網頁爬蟲、統計標準差模型與 Flask 後端架構</p>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchStock(this, '2330')">台積電 (2330)</button>
+        <button class="tab-btn" onclick="switchStock(this, '2317')">鴻海 (2317)</button>
+    </div>
+
+    <div class="chart-box">
+        <canvas id="myStockChart"></canvas>
+    </div>
+</div>
+
+<script>
+let chartInstance = null;
+
+function switchStock(button, stockId) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    drawChart(stockId);
+}
+
+function drawChart(stockId) {
+    fetch(`/api/stock/${stockId}`)
+        .then(res => res.json())
+        .then(res => {
+            if (!res.success) {
+                alert("無法載入資料，錯誤訊息：" + res.error);
+                return;
+            }
+            
+            const data = res.data;
+            const dates = data.map(i => i.date);
+            const closes = data.map(i => i.close_price);
+            const ma = data.map(i => i.ma20);
+            const upper = data.map(i => i.upper_band);
+            const lower = data.map(i => i.lower_band);
+
+            if (chartInstance) { chartInstance.destroy(); }
+
+            const ctx = document.getElementById('myStockChart').getEntries;
+            chartInstance = new Chart(document.getElementById('myStockChart'), {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [
+                        { label: '收盤價', data: closes, borderColor: '#2d3748', borderWidth: 2, fill: false },
+                        { label: '20日均線 (MA)', data: ma, borderColor: '#dd6b20', borderDash: [5, 5], fill: false },
+                        { label: '布林上軌 (MA + 2σ)', data: upper, borderColor: '#e53e3e', borderWidth: 1, fill: false },
+                        { label: '布林下軌 (MA - 2σ)', data: lower, borderColor: '#38a169', borderWidth: 1, fill: false }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: false } }
+                }
+            });
+        });
+}
+
+window.onload = () => drawChart('2330');
+</script>
+{% endblock %}
+</body>
+</html>
