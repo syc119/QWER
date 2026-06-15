@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <meta charset="UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>台積電與鴻海的股市分析</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-</head>
+{% extends "navbar.html" %}
 
-        <body>
-                {% extends "navbar.html" %}
+{% block content %}
 
-    {% block content %}
+<div class="hero">
 
-            <h1>歡迎來到這個網站</h1>
-            <p>這是一個分析當日台積電和鴻海的股市動態籌碼與布林通道的網站。</p>
-             {% endblock %}
-        </body>
-    </html>
+    <h1>📈 台積電與鴻海股票分析平台</h1>
+
+    <p>
+        即時分析台積電 (2330) 與鴻海 (2317)
+        的股價走勢、籌碼分布與布林通道訊號
+    </p>
+
+    <a href="{{ url_for('stock_dashboard') }}" class="start-btn">
+        開始分析 →
+    </a>
+
+</div>
+
+
+
+{% endblock %}

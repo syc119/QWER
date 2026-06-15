@@ -1,93 +1,392 @@
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
-      margin: 0;
-      padding: 0;
-      background-color: #f7f7f7;
-      color: #222;
+/* =========================
+   全域設定
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft JhengHei", Arial, sans-serif;
+    background-color: #f4f7fb;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* =========================
+   導覽列
+========================= */
+
+.navbar {
+    background: linear-gradient(
+        90deg,
+        #2a8de9,
+        #6788e2
+    );
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px 40px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.logo {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+
+/* =========================
+   主內容
+========================= */
+
+.main-content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* =========================
+   首頁 Hero 區塊
+========================= */
+
+.hero {
+    text-align: center;
+
+    padding: 100px 30px;
+
+    margin-top: 30px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        rgba(54, 112, 238, 0.9),
+        rgba(124, 189, 241, 0.9)
+    );
+
+    color: white;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* =========================
+   開始分析按鈕
+========================= */
+
+.start-btn {
+    display: inline-block;
+
+    margin-top: 30px;
+
+    background-color: #2563eb;
+    color: white;
+
+    padding: 15px 35px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-3px);
+}
+
+/* =========================
+   功能卡片
+========================= */
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    margin-top: 50px;
+
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+
+    width: 320px;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card h2 {
+    color: #1e3a8a;
+    margin-bottom: 15px;
+}
+
+.card p {
+    color: #555;
+}
+
+/* =========================
+   一般區塊
+========================= */
+
+section {
+    background: white;
+
+    padding: 25px;
+
+    margin-bottom: 25px;
+
+    border-radius: 12px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+h1, h2, h3 {
+    color: #1e3a8a;
+}
+
+/* =========================
+   股票資訊卡
+========================= */
+
+.stock-card {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    margin-top: 15px;
+
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.stock-price {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.stock-up {
+    color: #16a34a;
+}
+
+.stock-down {
+    color: #dc2626;
+}
+
+/* =========================
+   AI分析結果框
+========================= */
+
+.tag-box {
+    background: #eff6ff;
+
+    border-left: 5px solid #2563eb;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    margin-top: 15px;
+}
+
+/* =========================
+   表格
+========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+tr:hover {
+    background-color: #dbeafe;
+}
+
+/* =========================
+   表單
+========================= */
+
+form {
+    display: grid;
+    gap: 15px;
+    max-width: 600px;
+}
+
+input,
+select,
+textarea {
+    padding: 12px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+/* =========================
+   按鈕
+========================= */
+
+button {
+    background-color: #2563eb;
+    color: white;
+
+    border: none;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+
+/* =========================
+   程式碼區塊
+========================= */
+
+code {
+    background-color: #e2e8f0;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+
+    padding: 15px;
+
+    border-radius: 8px;
+
+    overflow-x: auto;
+}
+
+/* =========================
+   頁尾
+========================= */
+
+footer {
+    margin-top: 50px;
+
+    background-color: #0f172a;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+}
+
+/* =========================
+   手機版
+========================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
     }
 
-    header, footer {
-      background-color: #222;
-      color: white;
-      text-align: center;
-      padding: 20px;
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
     }
 
-    nav {
-      background-color: #444;
-      padding: 10px;
-      text-align: center;
+    .hero h1 {
+        font-size: 2rem;
     }
 
-    nav a {
-      color: white;
-      margin: 0 10px;
-      text-decoration: none;
+    .cards {
+        flex-direction: column;
+        align-items: center;
     }
 
-    main {
-      max-width: 1000px;
-      margin: 20px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
+    .card {
+        width: 90%;
     }
-
-    section {
-      margin-bottom: 40px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    h1, h2, h3 {
-      color: #1d3557;
-    }
-
-    code {
-      background-color: #eee;
-      padding: 2px 6px;
-      border-radius: 4px;
-    }
-
-    pre {
-      background-color: #272822;
-      color: #f8f8f2;
-      padding: 12px;
-      overflow-x: auto;
-      border-radius: 8px;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-top: 10px;
-    }
-
-    th, td {
-      border: 1px solid #999;
-      padding: 8px;
-      text-align: left;
-    }
-
-    form {
-      display: grid;
-      gap: 10px;
-      max-width: 500px;
-    }
-
-    input, select, textarea, button {
-      padding: 8px;
-      font-size: 16px;
-    }
-
-    .tag-box {
-      background: #f1f5f9;
-      border-left: 5px solid #457b9d;
-      padding: 12px;
-      margin: 10px 0;
-    }
-
-    mark {
-      background-color: yellow;
-    }
+}
