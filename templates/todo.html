@@ -1,7 +1,7 @@
 <!DOCTYPE html>
     <html>
         <head>
-            <title>Todo List</title>
+            <title>Use Sign</title>
             <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
         </head>
         <body>
@@ -9,13 +9,13 @@
 
             {% block content %}
 
-            <h1>Todo List</h1>
+            <h1> Use Sign </h1>
             
             <form action="/add" method="POST">
                 <input
                     type="text"
                     name="content"
-                    placeholder="請輸入待辦事項"
+                    placeholder="請輸入姓名"
                 >
                     <button type="submit">
                         新增
