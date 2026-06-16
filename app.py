@@ -15,10 +15,6 @@ from psycopg2.extras import RealDictCursor
 from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 
-from flask import Flask, render_template
-from stockRanking import get_twse_ranking  # 引入剛剛寫好的函式
-
-app = Flask(__name__)
 
 load_dotenv()
 
@@ -207,12 +203,6 @@ def get_stock_data(stock_id):
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
-@app.route("/ranking")
-def ranking_page():
-    # 呼叫爬蟲拿資料
-    data = get_twse_ranking() or []
-    # 丟給 templates/stock_ranking.html 渲染
-    return render_template("stock_ranking.html", rankings=data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000,debug=True)
