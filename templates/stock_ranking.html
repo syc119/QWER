@@ -1,0 +1,32 @@
+{% extends "home.html" %} {% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">台股盤後排行資訊 (前20名)</h2>
+
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% else %}
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        {% for col in columns %}
+                            <th>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stock in stock_list %}
+                        <tr>
+                            {% for col in columns %}
+                                <td>{{ stock[col] }}</td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
