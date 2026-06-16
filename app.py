@@ -15,9 +15,10 @@ from psycopg2.extras import RealDictCursor
 from flask import Flask, render_template, jsonify
 from dotenv import load_dotenv
 
-import requests
-import pandas as pd
-from flask import render_template # 確保有匯入 render_template
+from flask import Flask, render_template
+from stockRanking import get_twse_ranking  # 引入剛剛寫好的函式
+
+app = Flask(__name__)
 
 load_dotenv()
 
@@ -206,35 +207,12 @@ def get_stock_data(stock_id):
     except Exception as e:
         return jsonify({"success": False, "error": str(e)}), 500
 
-# 新增這個路由
-@app.route('/stock_ranking')
-def stock_ranking():
-    url = "https://www.twse.com.tw/rwd/zh/afterTrading/BFT41U"
-    params = {'response': 'json'}
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-    }
-    
-    try:
-        response = requests.get(url, params=params, headers=headers)
-        if response.status_code == 200 and response.json().get('stat') == 'OK':
-            data = response.json()
-            columns = data.get('fields', [])
-            rows = data.get('data', [])
-            
-            # 將資料打包成字典清單，方便前端 HTML 用迴圈讀取
-            stock_list = []
-            for row in rows:
-                stock_list.append(dict(zip(columns, row)))
-                
-            # 只取前 20 筆排名，避免網頁太長
-            stock_list = stock_list[:20] 
-            
-            return render_template('stock_ranking.html', stock_list=stock_list, columns=columns)
-        else:
-            return render_template('stock_ranking.html', error="無法從證交所取得正確資料")
-    except Exception as e:
-        return render_template('stock_ranking.html', error=f"連線發生錯誤: {str(e)}")
-        
+@app.route("/ranking")
+def ranking_page():
+    # 呼叫爬蟲拿資料
+    data = get_twse_ranking() or []
+    # 丟給 templates/stock_ranking.html 渲染
+    return render_template("stock_ranking.html", rankings=data)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000,debug=True)

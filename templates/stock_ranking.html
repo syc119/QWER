@@ -1,32 +1,54 @@
-{% extends "home.html" %} {% block content %}
-<div class="container mt-5">
-    <h2 class="mb-4 text-center">台股盤後排行資訊 (前20名)</h2>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>台股盤後排行資訊</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    {% extends "navbar.html" %}
 
-    {% if error %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
-        </div>
-    {% else %}
-        <div class="table-responsive">
-            <table class="table table-striped table-hover table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        {% for col in columns %}
-                            <th>{{ col }}</th>
-                        {% endfor %}
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for stock in stock_list %}
+    {% block content %}
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h2 class="mb-4 text-primary">台股盤後排行資訊 (前20名)</h2>
+        <p class="text-muted">資料來源：臺灣證券交易所 (TWSE)</p>
+
+        {% if rankings %}
+            <div class="table-responsive">
+                <table class="table table-striped table-hover table-bordered align-middle">
+                    <thead class="table-dark">
                         <tr>
-                            {% for col in columns %}
-                                <td>{{ stock[col] }}</td>
-                            {% endfor %}
+                            <th scope="col">排名</th>
+                            <th scope="col">證券代號</th>
+                            <th scope="col">證券名稱</th>
+                            <th scope="col">成交股數</th>
+                            <th scope="col">成交金額</th>
+                            <th scope="col">成交筆數</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    {% endif %}
-</div>
-{% endblock %}
+                    </thead>
+                    <tbody>
+                        {% for row in rankings %}
+                        <tr>
+                            <td class="fw-bold">{{ row['排序'] }}</td>
+                            <td>{{ row['證券代號'] }}</td>
+                            <td><span class="badge bg-secondary fs-6">{{ row['證券名稱'] }}</span></td>
+                            <td class="text-end">{{ row['成交股數'] }}</td>
+                            <td class="text-end text-danger fw-semibold">{{ row['成交金額'] }}</td>
+                            <td class="text-end">{{ row['成交筆數'] }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="alert alert-warning mt-4" role="alert">
+                ⚠️ 目前無法取得排行資料。可能原因：今日為非交易日、非盤後時間，或證交所拒絕連線。
+            </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% endblock %}
+</body>
+</html>
