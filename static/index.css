@@ -86,8 +86,8 @@ body {
     border-radius: 20px;
 
     background: linear-gradient(
-        rgba(54, 112, 238, 0.9),
-        rgba(124, 189, 241, 0.9)
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.9)
     );
 
     color: white;
@@ -389,4 +389,52 @@ footer {
     .card {
         width: 90%;
     }
+}
+/* 個人首頁 */
+
+.hero {
+    text-align: center;
+    padding: 80px 20px;
+    margin-top: 30px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    color: #5e7ab6;
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    font-size: 1.3rem;
+    color: #405c91;
+}
+
+/* 專題區塊 */
+
+.project-section {
+    background: linear-gradient(
+        rgba(157, 201, 228, 0.95),
+        rgba(21, 41, 107, 0.95)
+    );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 60px 30px;
+
+    border-radius: 20px;
+
+    margin-top: 40px;
+}
+
+.project-section h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 15px;
+}
+
+.project-section p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
 }

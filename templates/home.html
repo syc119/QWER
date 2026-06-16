@@ -2,14 +2,27 @@
 
 {% block content %}
 
+<!-- 個人首頁 -->
+
 <div class="hero">
 
-    <h1> 歡迎來到
-        台積電與鴻海股票分析平台</h1>
+    <h1>歡迎來到  YC的個人網頁</h1>
+
+    <p class="welcome-text">
+        這裡存放著我的課程作業、專題成果與學習紀錄
+    </p>
+
+</div>
+
+<!-- 股票分析專題 -->
+
+<div class="project-section">
+
+    <h2>📈 台積電與鴻海股票分析平台</h2>
 
     <p>
-        即時分析台積電 (2330) 與鴻海 (2317)
-        的股價走勢、籌碼分布與布林通道訊號
+        即時分析台積電（2330）與鴻海（2317）
+        的股價走勢、籌碼分布與布林通道訊號。
     </p>
 
     <a href="{{ url_for('stock_dashboard') }}" class="start-btn">
@@ -17,6 +30,7 @@
     </a>
 
 </div>
+
 <div class="cards">
 
     <div class="card">
@@ -30,11 +44,10 @@
     </div>
 
     <div class="card">
-        <h2>🤖 AI 建議</h2>
+        <h2>🤖 AI建議</h2>
         <p>根據技術指標自動生成投資參考意見</p>
     </div>
 
 </div>
-
 
 {% endblock %}
